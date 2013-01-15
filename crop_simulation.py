@@ -3,6 +3,9 @@ from PyQt4.QtGui import *
 
 from radio_button_widget import * #provides the radio button widget
 
+from wheat_class import * 
+from potato_class import *
+
 import sys
 
 class CropWindow(QMainWindow):
@@ -12,6 +15,8 @@ class CropWindow(QMainWindow):
 	def __init__(self):
 		super().__init__() #call super class constructor
 		self.setWindowTitle("Crop Simulator") #set window title
+
+
 
 
 
