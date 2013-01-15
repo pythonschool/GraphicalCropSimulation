@@ -16,7 +16,15 @@ class CropWindow(QMainWindow):
 		super().__init__() #call super class constructor
 		self.setWindowTitle("Crop Simulator") #set window title
 
+		self.create_select_crop_layout() #create the initial layout to choose the crop type
 
+		self.stackedLayout = QStackedLayout() #this holds the various layouts this window needs
+		self.stackedLayout.addWidget(self.select_crop_widget)
+
+		#set the central widget to display the layout
+		self.central_widget = QWidget()
+		self.central_widget.setLayout(self.stackedLayout)
+		self.setCentralWidget(self.central_widget)
 
 
 
