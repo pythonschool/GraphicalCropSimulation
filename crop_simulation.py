@@ -13,6 +13,8 @@ class CropWindow(QMainWindow):
 		super().__init__() #call super class constructor
 		self.setWindowTitle("Crop Simulator") #set window title
 
+
+
 	def create_select_crop_layout(self):
 		#this is the initial layout of the window - to select the crop type
 
@@ -30,6 +32,13 @@ class CropWindow(QMainWindow):
 
 		#connections
 		self.instantiate_button.clicked.connect(self.instantiate_crop)
+
+	def instantiate_crop(self):
+		crop_type = self.crop_radio_buttons.selected_button() #get the radio button that was selected
+		if crop_type == 1:
+			self.simulated_crop = Wheat()
+		elif crop_type == 2:
+			self.simulated_crop = Potato()
 
 def main():
 	crop_simulation = QApplication(sys.argv) #create new application
