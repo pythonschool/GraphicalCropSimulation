@@ -118,6 +118,18 @@ class CropWindow(QMainWindow):
 		self.days_line_edit.setText(str(crop_status_report["days growing"]))
 		self.status_line_edit.setText(str(crop_status_report["status"]))
 
+		#change the visual representation graphic
+		if crop_status_report["status"] == "Seed":
+			self.crop_view.switch_scene(0)
+		elif crop_status_report["status"] == "Seedling":
+			self.crop_view.switch_scene(1)
+		elif crop_status_report["status"] == "Young":
+			self.crop_view.switch_scene(2)
+		elif crop_status_report["status"] == "Mature":
+			self.crop_view.switch_scene(3)
+		elif crop_status_report["status"] == "Old":
+			self.crop_view.switch_scene(4)
+
 	def manually_grow_crop(self):
 		manual_values_dialog = ManualGrowDialog()
 		manual_values_dialog.exec_() #run the dialog window
