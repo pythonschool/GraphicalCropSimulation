@@ -2,6 +2,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from radio_button_widget import * #provides the radio button widget
+from manual_grow_dialog_class import * #provides the manual grow dialog window class
 
 from wheat_class import * 
 from potato_class import *
@@ -84,6 +85,7 @@ class CropWindow(QMainWindow):
 		self.view_crop_widget.setLayout(self.grow_grid)
 
 		#connections
+		self.manual_grow_button.clicked.connect(self.manually_grow_crop)
 		self.automatic_grow_button.clicked.connect(self.automatically_grow_crop)
 
 
@@ -105,6 +107,13 @@ class CropWindow(QMainWindow):
 		self.growth_line_edit.setText(str(crop_status_report["growth"]))
 		self.days_line_edit.setText(str(crop_status_report["days growing"]))
 		self.status_line_edit.setText(str(crop_status_report["status"]))
+
+	def manually_grow_crop(self):
+		manual_values_dialog = ManualGrowDialog()
+		manual_values_dialog.exec_() #run the dialog window
+		light, water = manual_values_dialog.values()
+		self.simulated_crop.grow(light,water)
+		self.update_crop_view_status()
 
 	def automatically_grow_crop(self):
 		for days in range(30):
