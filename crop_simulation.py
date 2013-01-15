@@ -3,6 +3,7 @@ from PyQt4.QtGui import *
 
 from radio_button_widget import * #provides the radio button widget
 from manual_grow_dialog_class import * #provides the manual grow dialog window class
+from crop_view_class import * #provides the graphical crop status display
 
 from wheat_class import * 
 from potato_class import *
@@ -48,7 +49,7 @@ class CropWindow(QMainWindow):
 		#connections
 		self.instantiate_button.clicked.connect(self.instantiate_crop)
 
-	def create_view_crop_layout(self):
+	def create_view_crop_layout(self,crop_type):
 		#this is the second layout of the window - view the crop growth
 
 		self.growth_label = QLabel("Growth")
@@ -58,6 +59,14 @@ class CropWindow(QMainWindow):
 		self.growth_line_edit = QLineEdit()
 		self.days_line_edit = QLineEdit()
 		self.status_line_edit = QLineEdit()
+
+		self.crop_view = CropView(crop_type) #create a view to display graphical status of crop
+
+		#ensure the crop view appears a certain size
+		self.crop_view.setHorizontalScrollBarPolicy(1)
+		self.crop_view.setVerticalScrollBarPolicy(1)
+		self.crop_view.setFixedHeight(182)
+		self.crop_view.setFixedWidth(242)
 
 		self.manual_grow_button = QPushButton("Manually Grow")
 		self.automatic_grow_button = QPushButton("Automatically Grow")
@@ -76,6 +85,7 @@ class CropWindow(QMainWindow):
 		self.status_grid.addWidget(self.status_line_edit,2,1)
 
 		#add widgets/layouts to the grow layout
+		self.grow_grid.addWidget(self.crop_view,0,0)
 		self.grow_grid.addLayout(self.status_grid,0,1)
 		self.grow_grid.addWidget(self.manual_grow_button,1,0)
 		self.grow_grid.addWidget(self.automatic_grow_button,1,1)
@@ -96,7 +106,7 @@ class CropWindow(QMainWindow):
 		elif crop_type == 2:
 			self.simulated_crop = Potato()
 
-		self.create_view_crop_layout() #create the second layout (to view crop growth)
+		self.create_view_crop_layout(crop_type) #create the second layout (to view crop growth)
 		self.stackedLayout.addWidget(self.view_crop_widget) #add this new widget to the stacked layout
 		self.stackedLayout.setCurrentIndex(1) #change the visible layout in the stack
 
