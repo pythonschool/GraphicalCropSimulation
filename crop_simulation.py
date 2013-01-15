@@ -7,6 +7,7 @@ from wheat_class import *
 from potato_class import *
 
 import sys
+import random
 
 class CropWindow(QMainWindow):
 	"""this class creates a main window to observe the growth of a simulated crop"""
@@ -82,6 +83,9 @@ class CropWindow(QMainWindow):
 		self.view_crop_widget = QWidget()
 		self.view_crop_widget.setLayout(self.grow_grid)
 
+		#connections
+		self.automatic_grow_button.clicked.connect(self.automatically_grow_crop)
+
 
 	def instantiate_crop(self):
 		crop_type = self.crop_radio_buttons.selected_button() #get the radio button that was selected
@@ -93,6 +97,21 @@ class CropWindow(QMainWindow):
 		self.create_view_crop_layout() #create the second layout (to view crop growth)
 		self.stackedLayout.addWidget(self.view_crop_widget) #add this new widget to the stacked layout
 		self.stackedLayout.setCurrentIndex(1) #change the visible layout in the stack
+
+	def update_crop_view_status(self):
+		crop_status_report = self.simulated_crop.report() #get the crop report
+
+		#update the text fields
+		self.growth_line_edit.setText(str(crop_status_report["growth"]))
+		self.days_line_edit.setText(str(crop_status_report["days growing"]))
+		self.status_line_edit.setText(str(crop_status_report["status"]))
+
+	def automatically_grow_crop(self):
+		for days in range(30):
+			light = random.randint(1,10)
+			water = random.randint(1,10)
+			self.simulated_crop.grow(light,water)
+		self.update_crop_view_status()
 
 def main():
 	crop_simulation = QApplication(sys.argv) #create new application
