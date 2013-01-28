@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+__pycache__
+/__pycache__/crop_class.cpython-33.pyc
