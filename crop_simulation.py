@@ -15,10 +15,7 @@ class CropWindow(QMainWindow):
 	def __init__(self):
 		super().__init__() #call super class constructor
 		self.setWindowTitle("Crop Simulator") #set window title
-
-
-
-
+		self.create_select_crop_layout()
 
 	def create_select_crop_layout(self):
 		#this is the initial layout of the window - to select the crop type
@@ -35,6 +32,8 @@ class CropWindow(QMainWindow):
 		self.select_crop_widget = QWidget()
 		self.select_crop_widget.setLayout(self.initial_layout)
 
+		self.setCentralWidget(self.select_crop_widget)
+
 		#connections
 		self.instantiate_button.clicked.connect(self.instantiate_crop)
 
@@ -44,6 +43,7 @@ class CropWindow(QMainWindow):
 			self.simulated_crop = Wheat()
 		elif crop_type == 2:
 			self.simulated_crop = Potato()
+		print(self.simulated_crop)
 
 def main():
 	crop_simulation = QApplication(sys.argv) #create new application
