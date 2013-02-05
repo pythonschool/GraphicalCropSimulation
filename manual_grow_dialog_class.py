@@ -18,11 +18,6 @@ class ManualGrowDialog(QDialog):
 		self.water_spinbox.setValue(1)
 		self.light_spinbox.setValue(1)
 
-		self.water_line_edit.setPlaceholderText("Water Value")
-		self.light_line_edit.setPlaceholderText("Light Value")
-
-		self.water_line_edit.clearFocus()
-
 		self.submit_button = QPushButton("Enter Values")
 
 		self.dialog_layout = QVBoxLayout()
@@ -36,4 +31,4 @@ class ManualGrowDialog(QDialog):
 		self.submit_button.clicked.connect(self.close)
 
 	def values(self):
-		return int(self.light_line_edit.text()), int(self.water_line_edit.text())
+		return int(self.light_spinbox.value()), int(self.water_spinbox.value())
