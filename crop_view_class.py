@@ -4,16 +4,10 @@ import crop_resources
 class CropView(QGraphicsView):
 	"""this class provides a graphics view that has the required resources for displaying status of wheat and potato crops"""
 
-	def __init__(self,crop_type):
+	def __init__(self):
 		super().__init__()
-		self.resources(crop_type) #create the necessary graphics scenes	
 
-	def resources(self,crop_type):
-		if crop_type == 1:
-			name = "wheat"
-		elif crop_type == 2:
-			name = "potato"
-
+	def resources(self,name):
 		#get the graphics
 		seed = QPixmap(":/{0}_seed.png".format(name))
 		seedling = QPixmap(":/{0}_seedling.png".format(name))
@@ -31,3 +25,13 @@ class CropView(QGraphicsView):
 
 	def switch_scene(self,scene):
 		self.setScene(self.crop_scenes[scene])
+
+class WheatView(CropView):
+    def __init__(self):
+        super().__init__()
+        self.resources("wheat")
+
+class PotatoView(CropView):
+    def __init__(self):
+        super().__init__()
+        self.resources("potato")

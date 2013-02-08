@@ -60,7 +60,10 @@ class CropWindow(QMainWindow):
 		self.days_line_edit = QLineEdit()
 		self.status_line_edit = QLineEdit()
 
-		self.crop_view = CropView(crop_type) #create a view to display graphical status of crop
+		if crop_type == 1:
+			self.crop_view = WheatView() #create a view to display graphical status of crop
+		elif crop_type == 2:
+			self.crop_view = PotatoView()
 
 		#ensure the crop view appears a certain size
 		self.crop_view.setHorizontalScrollBarPolicy(1)
