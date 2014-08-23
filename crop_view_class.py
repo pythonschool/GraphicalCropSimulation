@@ -1,4 +1,9 @@
-from PyQt4.QtGui import *
+try:
+    from PyQt4.QtGui import *
+except:
+    from PyQt5.QtWidgets import *
+    from PyQt5.QtGui import *
+    
 import crop_resources
 
 class CropView(QGraphicsView):

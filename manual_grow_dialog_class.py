@@ -1,4 +1,7 @@
-from PyQt4.QtGui import *
+try:
+    from PyQt4.QtGui import *
+except:
+    from PyQt5.QtWidgets import *
 
 class ManualGrowDialog(QDialog):
     """this class provides a dialog window to ask for light and water values"""

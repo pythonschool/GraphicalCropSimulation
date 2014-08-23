@@ -1,5 +1,9 @@
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+try:
+    from PyQt4.QtGui import *
+    from PyQt4.QtCore import *
+except:
+    from PyQt5.QtWidgets import *
+    from PyQt5.QtCore import *
 
 from radio_button_widget import * #provides the radio button widget
 from manual_grow_dialog_class import * #provides the manual grow dialog window class
@@ -103,6 +107,7 @@ class CropWindow(QMainWindow):
 
 
     def instantiate_crop(self):
+        print("hello")
         crop_type = self.crop_radio_buttons.selected_button() #get the radio button that was selected
         if crop_type == 1:
             self.simulated_crop = Wheat()
